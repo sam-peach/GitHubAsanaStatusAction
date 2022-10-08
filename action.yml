@@ -1,0 +1,12 @@
+name: "OneSig/Asana Status Bot"
+description: "Automatically sets the 'Task Status' on Asana tickets, given a PRs status"
+inputs:
+  asana-api-token:
+    description: "Asana API Token"
+    required: true
+outputs:
+  time:
+    description: "Time the action completed"
+runs:
+  using: "node16"
+  main: "index.js"
