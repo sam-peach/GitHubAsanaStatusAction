@@ -3,11 +3,11 @@ on:
     types: [opened, reopened, edited, closed]
 
 jobs:
-  hello_world_job:
+  set-asana-task-status:
     runs-on: ubuntu-latest
-    name: Set Asana ticket status
+    name: Set Asana task status
     steps:
-      - name: Set Asana ticket status
+      - name: Set Asana task status
         uses: OneSignal/GitHubAsanaStatusAction@main
         with:
           asana-api-token: ${{ secrets.ASANA_API_TOKEN }}
