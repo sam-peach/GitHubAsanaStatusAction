@@ -6,7 +6,7 @@ const {
 } = require("./constants");
 
 const findAsanaTaskIds = (prBody) =>
-  prBody.match(/(?<=app.asana.com\/.*\/.*\/)\d+/gm);
+  !!prBody ? prBody.match(/(?<=app.asana.com\/.*\/.*\/)\d+/gm) : null;
 
 const filterCustomFields = (taskData) =>
   taskData.custom_fields.find(({ name }) => CUSTOM_FIELD_NAMES.includes(name));
