@@ -6,24 +6,24 @@ const { findAsanaTaskIds } = require("./utils");
 const main = async () => {
   const foundIds = findAsanaTaskIds(context.payload.pull_request.body);
 
-  if (foundIds.length === 0) {
-    console.log(">> No Asana task IDs found! Moving on 🏃");
+  if (!foundIds || foundIds.length === 0) {
+    core.info(">> No Asana task IDs found! Moving on 🏃");
     return;
   }
 
-  console.log(">> Found Asana task IDs:", foundIds);
+  core.info(">> Found Asana task IDs:", foundIds);
 
   const tasksData = await getTaskStatuses(foundIds);
 
   tasksData.forEach(async (taskData) => {
-    console.log(
+    core.info(
       `>> Current status of ${taskData.taskId} is ${taskData.currentStatusName}`
     );
-    console.log(
+    core.info(
       `>> Next status of ${taskData.taskId} is ${taskData.nextStatusName}`
     );
     if (taskData.currentStatusName !== taskData.nextStatusName) {
-      console.log(
+      core.info(
         `>> Moving ${taskData.taskId} from '${taskData.currentStatusName}' to '${taskData.nextStatusName}' and marking complete as '${taskData.isComplete}' ...`
       );
 
@@ -34,9 +34,9 @@ const main = async () => {
         taskData.isComplete
       );
 
-      console.log(`>> 🎉 Moving complete 🎉`);
+      core.info(`>> 🎉 Moving complete 🎉`);
     } else {
-      console.log(`>> No updated needed! Moving on 🏃`);
+      core.info(`>> No updated needed! Moving on 🏃`);
     }
   });
 };
@@ -51,4 +51,5 @@ try {
   ${error.message}
   ---
   Exiting quietly.`);
+  return;
 }
