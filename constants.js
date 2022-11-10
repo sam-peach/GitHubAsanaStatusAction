@@ -2,10 +2,12 @@ const ASANA_API_URL = "https://app.asana.com/api/1.0/";
 
 const CUSTOM_FIELD_NAME_STATUS = "Status";
 const CUSTOM_FIELD_NAME_TICKET_STATUS = "Ticket Status";
+const CUSTOM_FIELD_NAME_TASK_STATE = "Task State";
 
 const CUSTOM_FIELD_NAMES = [
   CUSTOM_FIELD_NAME_STATUS,
   CUSTOM_FIELD_NAME_TICKET_STATUS,
+  CUSTOM_FIELD_NAME_TASK_STATE,
 ];
 
 const NO_STATUS = "None";
