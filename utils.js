@@ -5,6 +5,18 @@ const {
   CUSTOM_FIELD_NAMES,
 } = require("./constants");
 
+const shouldMoveStatus = (prBody) => {
+  if (!!prBody) {
+    const moveStatusMatch = prBody.match(
+      /(?<=(<!--\s+AsanaBot:MoveStatus:))\w+(?=\s+-->)/gm
+    );
+
+    return !!moveStatusMatch ? moveStatusMatch.pop() === "true" : false;
+  }
+
+  return false;
+};
+
 const findAsanaTaskIds = (prBody) =>
   !!prBody
     ? prBody.match(/(?<=app.asana.com\/.*\/.*\/)\d+(?=(\/f$|$))/gm)
@@ -29,6 +41,7 @@ const calcNextStatus = (enumOptions) => {
 };
 
 module.exports = {
+  shouldMoveStatus,
   findAsanaTaskIds,
   filterCustomFields,
   calcNextStatus,
